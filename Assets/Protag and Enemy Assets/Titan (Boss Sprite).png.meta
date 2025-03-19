@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: 757831be24120d24aa0ac8ab2485b38a
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -1287091326755085702
+    second: Titan (Boss Sprite)_0
+  - first:
+      213: 853487575546469860
+    second: Titan (Boss Sprite)_1
+  - first:
+      213: -3320292344837096791
+    second: Titan (Boss Sprite)_2
+  - first:
+      213: 4695530897927559703
+    second: Titan (Boss Sprite)_3
+  - first:
+      213: 1292784684520747411
+    second: Titan (Boss Sprite)_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +56,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -89,7 +104,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Titan (Boss Sprite)_0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1402
+        width: 877
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a72e643f145532ee0800000000000000
+      internalID: -1287091326755085702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Titan (Boss Sprite)_1
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 1393
+        width: 909
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ed18a09d6238db00800000000000000
+      internalID: 853487575546469860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Titan (Boss Sprite)_2
+      rect:
+        serializedVersion: 2
+        x: 2256
+        y: 1381
+        width: 910
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9aa398b34b3fbe1d0800000000000000
+      internalID: -3320292344837096791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Titan (Boss Sprite)_3
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 312
+        width: 910
+        height: 424
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ad7d24970e92140800000000000000
+      internalID: 4695530897927559703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Titan (Boss Sprite)_4
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 323
+        width: 876
+        height: 532
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 391bce332d4e0f110800000000000000
+      internalID: 1292784684520747411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
