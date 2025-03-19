@@ -4,16 +4,21 @@ using System.Collections;
 public class EnemyHealth : MonoBehaviour
 {
     public int maxHealth = 5; // Set enemy health
-    private int currentHealth;
+    public int currentHealth;
 
     private SpriteRenderer spriteRenderer;
     public Color damageColor = Color.red;
     private Color originalColor;
 
+    public AudioClip damageSound; // Assign in Inspector
+    private AudioSource audioSource;
+
+
     void Start()
     {
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         if (spriteRenderer != null)
         {
@@ -24,6 +29,11 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        if (damageSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(damageSound);
+        }
 
         StartCoroutine(FlashRed());
 
@@ -43,7 +53,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    private void Die()
+    public virtual void Die()
     {
         Debug.Log(gameObject.name + " has been defeated!");
         Destroy(gameObject); // Destroy enemy

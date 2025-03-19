@@ -17,11 +17,16 @@ public class Movement : MonoBehaviour
     Animator animator;
     SpriteRenderer spriteRenderer;
 
+    public AudioClip jumpSound; // Assign in the Inspector
+    private AudioSource audioSource;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -43,6 +48,11 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             isJumping = true;
+
+            if (jumpSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
 
         // Wall Jump

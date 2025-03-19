@@ -12,6 +12,15 @@ public class PlayerShooting : MonoBehaviour
 
     private bool isFacingRight = true; // Make sure this matches your movement script
 
+
+    public AudioClip shootSound; // Assign the shooting sound in the Inspector
+    private AudioSource audioSource; // Reference to AudioSource
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
+    }
+
     void Update()
     {
         // Get player direction from transform scale or movement script
@@ -44,6 +53,11 @@ public class PlayerShooting : MonoBehaviour
         // Set bullet direction based on facing direction
         float direction = isFacingRight ? 1f : -1f;
         rb.velocity = new Vector2(direction * bulletSpeed, 0f);
+
+        if (shootSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
     }
 
 }

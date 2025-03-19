@@ -8,6 +8,14 @@ public class SpeedBoostPickup : MonoBehaviour
     public float fireRateMultiplier = 0.5f; // Reduces fire rate (faster shooting)
     public float boostDuration = 5f;  // How long the boost lasts
 
+    public AudioClip pickupSound;
+    private AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>(); // Get AudioSource component
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -18,6 +26,11 @@ public class SpeedBoostPickup : MonoBehaviour
             if (playerMovement != null && playerShooting != null)
             {
                 StartCoroutine(BoostPlayer(playerMovement, playerShooting));
+            }
+
+            if (pickupSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(pickupSound);
             }
 
             // Disable visual & collider immediately to prevent multiple triggers

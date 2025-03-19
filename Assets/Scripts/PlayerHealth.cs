@@ -13,6 +13,9 @@ public class PlayerHealth : MonoBehaviour
     public Color damageColor = Color.red;
     private Color originalColor;
 
+    public AudioClip hurtSound; // Assign in the Inspector
+    private AudioSource audioSource;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -21,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
         {
             originalColor = spriteRenderer.color;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int damage)
@@ -33,6 +38,11 @@ public class PlayerHealth : MonoBehaviour
             if (spriteRenderer != null)
             {
                 StartCoroutine(FlashRed());
+            }
+
+            if (hurtSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(hurtSound);
             }
 
             if (currentHealth <= 0)

@@ -3,26 +3,29 @@ using System.Collections;
 
 public class BossAI : MonoBehaviour
 {
-    public float chaseSpeed = 4f;       // Speed when chasing the player
-    public float floatSpeed = 2f;       // Speed while floating
-    public float floatRadius = 3f;      // Distance boss can float randomly
-    public float floatPauseTime = 1.5f; // Pause before floating again
-    public float detectionRange = 5f;   // Distance at which the boss detects the player
-    public float damageInterval = 1f;   // Time between damage instances
-    public int damageAmount = 10;       // Damage the player takes per interval
+    public float chaseSpeed = 4f;
+    public float floatSpeed = 2f;
+    public float floatRadius = 3f;
+    public float floatPauseTime = 1.5f;
+    public float detectionRange = 5f;
+    public float damageInterval = 1f;
+    public int damageAmount = 10;
 
     private Transform player;
     private Vector2 floatTarget;
     private bool isChasing = false;
     private Coroutine floatingRoutine;
+    private Coroutine damageRoutine;
     private SpriteRenderer spriteRenderer;
-    private Coroutine damageRoutine; // Keeps track of the damage coroutine
+    private Rigidbody2D rb;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         floatingRoutine = StartCoroutine(FloatAround()); // Start floating movement
     }
 
@@ -65,7 +68,7 @@ public class BossAI : MonoBehaviour
 
     IEnumerator FloatAround()
     {
-        while (!isChasing) // Keep floating when not chasing
+        while (!isChasing)
         {
             floatTarget = GetRandomFloatPosition();
             Debug.Log("Floating to: " + floatTarget);
@@ -87,10 +90,10 @@ public class BossAI : MonoBehaviour
     {
         while (Vector2.Distance(transform.position, target) > 0.2f && !isChasing)
         {
-            transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            rb.MovePosition(Vector2.MoveTowards(rb.position, target, speed * Time.deltaTime));
 
-            // Flip sprite based on direction (default faces left)
-            spriteRenderer.flipX = target.x > transform.position.x;
+            // Flip sprite based on direction
+            spriteRenderer.flipX = target.x > rb.position.x;
 
             yield return null;
         }
@@ -99,27 +102,28 @@ public class BossAI : MonoBehaviour
     void ChasePlayer()
     {
         Debug.Log("Boss is chasing the player!");
-        transform.position = Vector2.MoveTowards(transform.position, player.position, chaseSpeed * Time.deltaTime);
 
-        // Flip sprite based on direction (default faces left)
-        spriteRenderer.flipX = player.position.x > transform.position.x;
+        rb.MovePosition(Vector2.MoveTowards(rb.position, player.position, chaseSpeed * Time.deltaTime));
+
+        // Flip sprite based on direction
+        spriteRenderer.flipX = player.position.x > rb.position.x;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Boss is on top of the player!");
+            Debug.Log("Boss collided with the player!");
             if (damageRoutine == null)
             {
-                damageRoutine = StartCoroutine(DealDamageOverTime(other.GetComponent<PlayerHealth>()));
+                damageRoutine = StartCoroutine(DealDamageOverTime(collision.gameObject.GetComponent<PlayerHealth>()));
             }
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Boss is no longer touching the player.");
             if (damageRoutine != null)
@@ -132,11 +136,10 @@ public class BossAI : MonoBehaviour
 
     IEnumerator DealDamageOverTime(PlayerHealth playerHealth)
     {
-        while (playerHealth != null) // Ensure the player exists
+        while (playerHealth != null)
         {
             playerHealth.TakeDamage(damageAmount);
             Debug.Log("Player took " + damageAmount + " damage!");
-
             yield return new WaitForSeconds(damageInterval);
         }
     }
