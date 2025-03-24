@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSound: {fileID: 8300000, guid: d97d02c7d99c83c4abb98a3421f18ca1, type: 3}
+  destroyDelay: 0.7
 --- !u!82 &-6271670117866399903
 AudioSource:
   m_ObjectHideFlags: 0

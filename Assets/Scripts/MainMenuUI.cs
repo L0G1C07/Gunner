@@ -17,7 +17,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Game"); // Change to your actual scene name
+        SceneManager.LoadScene("Tutorial"); // Change to your actual scene name
     }
 
     public void ShowHowToPlay()

@@ -67,8 +67,10 @@ public class EnemyPatrolChase : MonoBehaviour
     {
         Vector2 direction = (target - (Vector2)transform.position).normalized;
 
-        rb.velocity = direction * speed;
+        // Preserve the existing Y velocity (gravity)
+        rb.velocity = new Vector2(direction.x * speed, rb.velocity.y);
 
+        // Flip sprite based on movement direction
         if (direction.x > 0)
         {
             spriteRenderer.flipX = false;
@@ -78,4 +80,5 @@ public class EnemyPatrolChase : MonoBehaviour
             spriteRenderer.flipX = true;
         }
     }
+
 }
